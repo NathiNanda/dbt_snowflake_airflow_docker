@@ -1,6 +1,6 @@
 # 💸 Exchange Rate Pipeline: AWS S3 + Snowflake + dbt-snowflake + Apache Airflow (Docker)
 
-Este projeto representa o **Nível Intermediário** da trilha de engenharia de dados, focado em transição para a nuvem, armazenamento semiestruturado e orquestração de pipelines de dados ponta a ponta. 
+Este projeto é focado na transição do meu projeto local [ETL Python DuckDB DBT] para a nuvem, armazenamento semiestruturado e orquestração de pipelines de dados ponta a ponta. 
 
 O objetivo é capturar cotações diárias de moedas (USD, EUR e BTC) da **AwesomeAPI**, armazená-las como arquivos brutos em um Data Lake no **AWS S3**, carregá-las de forma incremental em uma tabela RAW no **Snowflake** (usando o tipo `VARIANT`) e realizar a modelagem de dados e testes de qualidade via **dbt-snowflake**, tudo orquestrado automaticamente pelo **Apache Airflow** rodando em **Docker**.
 
@@ -21,6 +21,18 @@ graph TD
     G -->|7. Window Functions| H[(Snowflake: fct_exchange_rates)]
 ```
 
+## AWS S3
+<img width="1907" height="575" alt="image" src="https://github.com/user-attachments/assets/800d094e-6ca3-4dd7-b793-a3a70c2b2538" />
+
+## Snowflake
+<img width="1915" height="666" alt="image" src="https://github.com/user-attachments/assets/7aa98e14-a5f7-47fd-8631-cc4efc2421ce" />
+
+## Docker
+<img width="1907" height="1007" alt="image" src="https://github.com/user-attachments/assets/69bc74b0-a6dd-437f-abac-e224ad672419" />
+
+## Airflow
+<img width="1917" height="848" alt="image" src="https://github.com/user-attachments/assets/47c9d5ce-3b3f-4594-9aaa-65ff96794a10" />
+
 ---
 
 ## 🛠️ Tecnologias Utilizadas
@@ -29,7 +41,7 @@ graph TD
 * **Ingestão & Carga (Extract & Load):** Python 3.12 (`boto3` para AWS S3 e `requests`)
 * **Armazenamento de Arquivos (Data Lake):** AWS S3
 * **Data Warehouse:** Snowflake (com suporte a dados semiestruturados)
-* **Transformação (Transform):** dbt Core 1.11.x (`dbt-snowflake` adapter)
+* **Transformação (Transform):** dbt Core 1.11.x (`dbt-snowflake`)
 * **Gerenciamento de Dependências:** `uv` (gerenciador rápido de pacotes Python)
 
 ---
@@ -95,4 +107,4 @@ Acesse o painel do Airflow no navegador: **`http://localhost:8080`** (Login: `ai
 1. No painel do Airflow, localize a DAG `exchange_rate_pipeline`.
 2. Ative-a clicando no interruptor azul (Unpause).
 3. Clique em **Trigger DAG** (ícone de "Play" no canto superior direito) para disparar a execução.
-4. Acompanhe a execução sequencial. Com todas as tarefas em verde, verifique suas tabelas e execute as transformações diretamente no Snowflake!
+4. Acompanhe a execução sequencial. Com todas as tarefas em verde, verifique suas tabelas diretamente no Snowflake!
