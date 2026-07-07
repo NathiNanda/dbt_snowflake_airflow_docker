@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: raw_data
+    database: "{{ env_var('SNOWFLAKE_DATABASE') }}"
+    schema: "{{ env_var('SNOWFLAKE_SCHEMA') }}"
+    tables:
+      - name: raw_exchange_rates
+        description: "Tabela contendo os dados brutos de câmbio importados em formato JSON (coluna VARIANT)."

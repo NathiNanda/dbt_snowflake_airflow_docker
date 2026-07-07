@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: stg_exchange_rates
+    description: "Tabela unificada e tratada no Snowflake contendo o histórico de cotações diárias de moedas."
+    columns:
+      - name: id_cotacao
+        description: "Chave primária (surrogate key) gerada por MD5 concatenando código da moeda e data de criação."
+        data_tests:
+          - unique
+          - not_null
+
+      - name: codigo_moeda
+        description: "Código identificador da moeda (ex: USD, EUR, BTC)."
+        data_tests:
+          - not_null
+
+      - name: valor_compra
+        description: "Valor cotado de compra para a moeda."
+        data_tests:
+          - not_null
+
+      - name: data_criacao
+        description: "Timestamp em que a cotação foi registrada pela API convertido para data."
+        data_tests:
+          - not_null

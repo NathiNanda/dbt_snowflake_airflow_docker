@@ -1,0 +1,39 @@
+version: 2
+
+models:
+  - name: fct_exchange_rates
+    description: "Tabela Fato analítica consolidada contendo as cotações de moedas enriquecidas com variação percentual diária e médias móveis."
+    columns:
+      - name: id_cotacao
+        description: "Chave primária surrogate key gerada por hash MD5 (código da moeda + timestamp de cotação)."
+        data_tests:
+          - unique
+          - not_null
+
+      - name: codigo_moeda
+        description: "Código identificador da moeda (ex: USD, EUR, BTC)."
+        data_tests:
+          - not_null
+          - accepted_values:
+              values: ['USD', 'EUR', 'BTC']
+
+      - name: valor_compra
+        description: "Valor cotado de compra para a moeda no dia."
+        data_tests:
+          - not_null
+
+      - name: valor_compra_dia_anterior
+        description: "Valor cotado de compra no dia anterior obtido via função analítica LAG."
+
+      - name: variacao_percentual_diaria
+        description: "Variação percentual calculada em relação à cotação do dia anterior."
+
+      - name: media_movel_7_dias
+        description: "Média móvel calculada sobre os últimos 7 dias da cotação."
+        data_tests:
+          - not_null
+
+      - name: data_criacao
+        description: "Timestamp em que a cotação foi registrada pela API e convertida para data e hora."
+        data_tests:
+          - not_null
