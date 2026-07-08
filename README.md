@@ -10,16 +10,7 @@ O objetivo é capturar cotações diárias de moedas (USD, EUR e BTC) da **Aweso
 
 O fluxo de dados segue uma abordagem **ELT (Extract, Load, Transform)** moderna:
 
-```mermaid
-graph TD
-    A[AwesomeAPI] -->|1. Python requests| B(Apache Airflow)
-    B -->|2. Upload JSON bruto via boto3| C[AWS S3 Bucket]
-    B -->|3. COPY INTO Command| D[Snowflake RAW Stage]
-    D -->|4. Ingestão sem quebra| E[(Snowflake: raw_exchange_rates)]
-    B -->|5. dbt run / dbt test| F{dbt Core}
-    F -->|6. SQL Parse & Cast| G[(Snowflake: stg_exchange_rates)]
-    G -->|7. Window Functions| H[(Snowflake: fct_exchange_rates)]
-```
+<img width="850" height="748" alt="image" src="https://github.com/user-attachments/assets/b610ae09-1e3e-4565-8232-312de5f2df50" />
 
 ## AWS S3
 <img width="1907" height="575" alt="image" src="https://github.com/user-attachments/assets/800d094e-6ca3-4dd7-b793-a3a70c2b2538" />
